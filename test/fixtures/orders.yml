@@ -1,0 +1,78 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  recipient_institute_name: Wellcome Trust Sanger Institute
+  recipient_institute_street: Genome Campus Hinxton
+  recipient_institute_city: Cambridge
+  recipient_institute_zip: CB10 1SA
+  recipient_institute_country: United Kingdom
+  shipping_address_institute: Wellcome Trust Sanger Institute
+  shipping_address_person: Rodney Trotter
+  shipping_address_street: Genome Campus Hinxton
+  shipping_address_city: Cambridge
+  shipping_address_zip: CB10 1SA
+  recipient_principal_scientist_person: Derek Trotter
+  recipient_principal_scientist_institute: Wellcome Trust Sanger Institute
+  recipient_principal_scientist_street: Genome Campus Hinxton
+  recipient_principal_scientist_city: Cambridge
+  recipient_principal_scientist_zip: CB10 1SA
+  recipient_principal_scientist_phone: +44 (0)1223 834244
+  recipient_principal_scientist_fax: +44 (0)1223 494919
+  recipient_principal_scientist_email: derek.trotter@sanger.ac.uk
+  recipient_authorized_official_person: Trigger
+  recipient_authorized_official_institute: Wellcome Trust Sanger Institute
+  recipient_authorized_official_street: Genome Campus
+  recipient_authorized_official_city: Cambridge
+  recipient_authorized_official_zip: CB10 1SA
+  recipient_authorized_official_phone: +44 (0)1223 834244
+  recipient_authorized_official_fax: +44 (0)1223 494919
+  recipient_authorized_official_email: trigger@sanger.ac.uk
+  billing_address_institute: Wellcome Trust Sanger Institute
+  billing_address_street: Genome Campus
+  billing_address_city: Cambridge
+  billing_address_country: United Kingdom
+  billing_address_reference: PO-12345678
+  tax_eu_member_state: true
+  tax_eu_vat_id: 447-551-2323
+  usage_aims_of_experiments: This time next year we'll be millionares!
+  usage_eu_projects: EUMODIC
+
+two:
+  recipient_institute_name: Cambridge Univerity
+  recipient_institute_additional_address_line: Department of Theoretical Stuff
+  recipient_institute_street: Tennis Court Road
+  recipient_institute_city: Cambridge
+  recipient_institute_zip: CB10 18BB
+  recipient_institute_country: United Kingdom
+  shipping_address_institute: Cambridge Univerity
+  shipping_address_person: Bob Flemming
+  shipping_address_additional_address_line: Department of Theoretical Stuff
+  shipping_address_street: Tennis Court Road
+  shipping_address_city: Cambridge
+  shipping_address_zip: CB10 18BB
+  recipient_principal_scientist_person: Professor Denzil Dexter
+  recipient_principal_scientist_institute: Cambridge Univerity
+  recipient_principal_scientist_additional_address_line: Department of Theoretical Stuff
+  recipient_principal_scientist_street: Tennis Court Road
+  recipient_principal_scientist_city: Cambridge
+  recipient_principal_scientist_zip: CB10 18BB
+  recipient_principal_scientist_phone: +44 (0)1223 834244
+  recipient_principal_scientist_fax: +44 (0)1223 494919
+  recipient_principal_scientist_email: denzil.dexter@cam.ac.uk
+  recipient_authorized_official_person: Patrick Nice
+  recipient_authorized_official_institute: Cambridge Univerity
+  recipient_authorized_official_additional_address_line: Department of Theoretical Stuff
+  recipient_authorized_official_street: Tennis Court Road
+  recipient_authorized_official_city: Cambridge
+  recipient_authorized_official_zip: CB10 18BB
+  recipient_authorized_official_phone: +44 (0)1223 834244
+  recipient_authorized_official_fax: +44 (0)1223 494919
+  recipient_authorized_official_email: patrick.nice@cam.ac.uk
+  billing_address_institute: Cambridge Univerity
+  billing_address_additional_address_line: Department of Theoretical Stuff
+  billing_address_street: Tennis Court Road
+  billing_address_city: Cambridge
+  billing_address_country: United Kingdom
+  billing_address_reference: MyString
+  tax_eu_member_state: true
+  usage_aims_of_experiments: You ain't seen me right?
