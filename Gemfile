@@ -13,6 +13,7 @@ gem 'rails', '3.0.3'
 gem 'pg'
 gem 'rsolr'
 gem 'spectator-validates_email', :require => 'validates_email'
+gem 'formtastic', '~> 1.1.0'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
