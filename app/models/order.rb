@@ -16,5 +16,6 @@ class Order < ActiveRecord::Base
   
   validates_presence_of :tax_eu_member_state
   
-  
+  validates :recipient_principal_scientist_email, :email => true
+  validates :recipient_authorized_official_email, :email => true
 end

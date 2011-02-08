@@ -73,6 +73,5 @@ two:
   billing_address_street: Tennis Court Road
   billing_address_city: Cambridge
   billing_address_country: United Kingdom
-  billing_address_reference: MyString
   tax_eu_member_state: true
   usage_aims_of_experiments: You ain't seen me right?
