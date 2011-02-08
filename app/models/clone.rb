@@ -22,7 +22,7 @@ class Clone < ActiveRecord::Base
   end
   
   def solr_response
-    JSON.parse( SOLR.get 'select', :params => { :q => "escell:#{name}" } )
+    SOLR.get 'select', :params => { :q => "escell:#{name}" }
   end
   
   def find_in_solr
