@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
   setup do
-    @order = orders(:one)
+    @order = Factory.create(:order)
   end
 
   test "should get index" do
