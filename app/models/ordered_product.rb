@@ -7,8 +7,10 @@ class OrderedProduct < ActiveRecord::Base
   
   validate :validate_solr_response
   
+  before_save { |product| product.gene = find_in_solr['marker_symbol'] }
+  
   def mgi_accession_id
-    find_in_solr["mgi_accession_id"]
+    find_in_solr['mgi_accession_id']
   end
   
   private
@@ -22,11 +24,11 @@ class OrderedProduct < ActiveRecord::Base
   end
   
   def find_in_solr
-    solr_response = SOLR.get 'select', :params => { :q => "marker_symbol:#{gene}" }
+    solr_response = SOLR.get 'select', :params => { :q => "#{gene}" }
     docs          = []
     
-    solr_response["response"]["docs"].each do |doc|
-      docs.push(doc) if doc["marker_symbol"] == gene
+    solr_response['response']['docs'].each do |doc|
+      docs.push(doc) if doc['marker_symbol'].downcase == gene.downcase
     end
     
     docs.first
