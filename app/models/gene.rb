@@ -1,4 +1,7 @@
 class Gene < ActiveRecord::Base
+  has_many :ordered_products
+  has_many :orders, :through => :ordered_products
+  
   validates_presence_of :symbol
   validates_uniqueness_of :symbol
   validate :validate_solr_response

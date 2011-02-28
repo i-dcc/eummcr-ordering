@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
+  has_many :ordered_products
+  has_many :genes, :through => :ordered_products
+  
   validates_presence_of :recipient_institute_name
   validates_presence_of :recipient_institute_street
   validates_presence_of :recipient_institute_city

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110208141244) do
+ActiveRecord::Schema.define(:version => 20110225110802) do
 
   create_table "genes", :force => true do |t|
     t.string   "symbol",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ordered_products", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "gene_id"
+    t.string   "product",                                 :null => false
+    t.boolean  "genotyping",           :default => false
+    t.boolean  "extra_vial_per_clone", :default => false
+    t.boolean  "allele_qc",            :default => false
+    t.boolean  "karyotyping",          :default => false
+    t.boolean  "replacement_vials",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,5 +80,8 @@ ActiveRecord::Schema.define(:version => 20110208141244) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_foreign_key "ordered_products", "genes", :name => "ordered_products_gene_id_fk"
+  add_foreign_key "ordered_products", "orders", :name => "ordered_products_order_id_fk"
 
 end

@@ -14,6 +14,7 @@ gem 'pg'
 gem 'rsolr'
 gem 'spectator-validates_email', :require => 'validates_email'
 gem 'formtastic', '~> 1.1.0'
+gem 'foreigner'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
@@ -22,4 +23,5 @@ group :test do
   gem 'shoulda'
   gem 'webmock'
   gem 'vcr'
+  gem 'factory_girl_rails'
 end
