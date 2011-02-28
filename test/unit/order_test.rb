@@ -1,6 +1,16 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+  setup do
+    VCR.insert_cassette( "unit-order_test" )
+  end
+  
+  teardown do
+    VCR.eject_cassette
+  end
+  
+  should have_many            :ordered_products
+  
   should validate_presence_of :recipient_institute_name
   should validate_presence_of :recipient_institute_street
   should validate_presence_of :recipient_institute_city
@@ -17,7 +27,7 @@ class OrderTest < ActiveSupport::TestCase
   
   context "An Order Model" do
     should "validate email addresses correctly" do
-      test_order = Order.first
+      test_order = Factory.create(:order)
       
       orig_email = test_order.recipient_principal_scientist_email.dup
       test_order.recipient_principal_scientist_email = 'wibble'
