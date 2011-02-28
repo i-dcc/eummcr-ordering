@@ -1,48 +1,70 @@
 <%= semantic_form_for @order do |f| %>
-  <% f.inputs do %>
-    <%= f.input :recipient_institute_name, :label => 'Recipient institute name' %>
-    <%= f.input :recipient_institute_additional_address_line, :label => 'Recipient institute additional address line' %>
-    <%= f.input :recipient_institute_street, :label => 'Recipient institute street' %>
-    <%= f.input :recipient_institute_state, :label => 'Recipient institute state' %>
-    <%= f.input :recipient_institute_city, :label => 'Recipient institute city' %>
-    <%= f.input :recipient_institute_zip, :label => 'Recipient institute zip' %>
-    <%= f.input :recipient_institute_country, :label => 'Recipient institute country' %>
-    <%= f.input :shipping_address_institute, :label => 'Shipping address institute' %>
-    <%= f.input :shipping_address_person, :label => 'Shipping address person' %>
-    <%= f.input :shipping_address_additional_address_line, :label => 'Shipping address additional address line' %>
-    <%= f.input :shipping_address_street, :label => 'Shipping address street' %>
-    <%= f.input :shipping_address_state, :label => 'Shipping address state' %>
-    <%= f.input :shipping_address_city, :label => 'Shipping address city' %>
-    <%= f.input :shipping_address_zip, :label => 'Shipping address zip' %>
-    <%= f.input :recipient_principal_scientist_person, :label => 'Recipient principal scientist person' %>
-    <%= f.input :recipient_principal_scientist_institute, :label => 'Recipient principal scientist institute' %>
-    <%= f.input :recipient_principal_scientist_additional_address_line, :label => 'Recipient principal scientist additional address line' %>
-    <%= f.input :recipient_principal_scientist_street, :label => 'Recipient principal scientist street' %>
-    <%= f.input :recipient_principal_scientist_state, :label => 'Recipient principal scientist state' %>
-    <%= f.input :recipient_principal_scientist_city, :label => 'Recipient principal scientist city' %>
-    <%= f.input :recipient_principal_scientist_zip, :label => 'Recipient principal scientist zip' %>
-    <%= f.input :recipient_principal_scientist_phone, :label => 'Recipient principal scientist phone' %>
-    <%= f.input :recipient_principal_scientist_fax, :label => 'Recipient principal scientist fax' %>
-    <%= f.input :recipient_principal_scientist_email, :label => 'Recipient principal scientist email' %>
-    <%= f.input :recipient_authorized_official_person, :label => 'Recipient authorized official person' %>
-    <%= f.input :recipient_authorized_official_institute, :label => 'Recipient authorized official institute' %>
-    <%= f.input :recipient_authorized_official_additional_address_line, :label => 'Recipient authorized official additional address line' %>
-    <%= f.input :recipient_authorized_official_street, :label => 'Recipient authorized official street' %>
-    <%= f.input :recipient_authorized_official_state, :label => 'Recipient authorized official state' %>
-    <%= f.input :recipient_authorized_official_city, :label => 'Recipient authorized official city' %>
-    <%= f.input :recipient_authorized_official_zip, :label => 'Recipient authorized official zip' %>
-    <%= f.input :recipient_authorized_official_phone, :label => 'Recipient authorized official phone' %>
-    <%= f.input :recipient_authorized_official_fax, :label => 'Recipient authorized official fax' %>
-    <%= f.input :recipient_authorized_official_email, :label => 'Recipient authorized official email' %>
-    <%= f.input :billing_address_institute, :label => 'Billing address institute' %>
-    <%= f.input :billing_address_additional_address_line, :label => 'Billing address additional address line' %>
-    <%= f.input :billing_address_street, :label => 'Billing address street' %>
-    <%= f.input :billing_address_state, :label => 'Billing address state' %>
-    <%= f.input :billing_address_city, :label => 'Billing address city' %>
-    <%= f.input :billing_address_country, :label => 'Billing address country' %>
-    <%= f.input :billing_address_reference, :label => 'Billing address reference' %>
+  <% f.inputs "Recipient's Institution", :id => "recipients_intitution" do %>
+    <%= f.input :recipient_institute_name, :label => "Institution's Full Name" %>
+    <%= f.input :recipient_institute_additional_address_line, :label => 'Additional Address Line' %>
+    <%= f.input :recipient_institute_street, :label => 'Street' %>
+    <%= f.input :recipient_institute_state, :label => 'State' %>
+    <%= f.input :recipient_institute_city, :label => 'City' %>
+    <%= f.input :recipient_institute_zip, :label => 'Zip-Code' %>
+    <%= f.input :recipient_institute_country, :label => 'Country' %>
+  <% end %>
+  
+  <%= f.inputs "Shipping Address", :id => "shipping_address" do %>
+    <%= f.input :shipping_address_institute, :label => "Institution's Full Name" %>
+    <%= f.input :shipping_address_person, :label => 'Person/Institute to Send Material to' %>
+    <%= f.input :shipping_address_additional_address_line, :label => 'Additional Address Line' %>
+    <%= f.input :shipping_address_street, :label => 'Street' %>
+    <%= f.input :shipping_address_state, :label => 'State' %>
+    <%= f.input :shipping_address_city, :label => 'City' %>
+    <%= f.input :shipping_address_zip, :label => 'Zip-Code' %>
+  <% end %>
+  
+  <%= f.inputs "Recipient Principal Scientist", :id => "recipient_principal_scientist" do %>
+    <%= f.input :recipient_principal_scientist_person, :label => 'Full Name' %>
+    <%= f.input :recipient_principal_scientist_institute, :label => 'Institute' %>
+    <%= f.input :recipient_principal_scientist_additional_address_line, :label => 'Additional Address Line' %>
+    <%= f.input :recipient_principal_scientist_street, :label => 'Street' %>
+    <%= f.input :recipient_principal_scientist_state, :label => 'State' %>
+    <%= f.input :recipient_principal_scientist_city, :label => 'City' %>
+    <%= f.input :recipient_principal_scientist_zip, :label => 'Zip-Code' %>
+    <%= f.input :recipient_principal_scientist_phone, :label => 'Phone' %>
+    <%= f.input :recipient_principal_scientist_fax, :label => 'Fax' %>
+    <%= f.input :recipient_principal_scientist_email, :label => 'E-Mail' %>
+  <% end %>
+  
+  <%= f.inputs "Recipient Authorized Official", :id => "recipient_authorized_official" do %>
+    <%= f.input :recipient_authorized_official_institute, :label => "Institution's Full Name" %>
+    <%= f.input :recipient_authorized_official_person, :label => "Official's Full Name" %>
+    <%= f.input :recipient_authorized_official_additional_address_line, :label => 'Additional Address Line' %>
+    <%= f.input :recipient_authorized_official_street, :label => 'Street' %>
+    <%= f.input :recipient_authorized_official_state, :label => 'State' %>
+    <%= f.input :recipient_authorized_official_city, :label => 'City' %>
+    <%= f.input :recipient_authorized_official_zip, :label => 'Zip-Code' %>
+    <%= f.input :recipient_authorized_official_phone, :label => 'Phone' %>
+    <%= f.input :recipient_authorized_official_fax, :label => 'Fax' %>
+    <%= f.input :recipient_authorized_official_email, :label => 'E-Mail' %>
+  <% end %>
+  
+  <%= f.inputs "Billing Address", :id => "billing_address" do %>
+    <%= f.input :billing_address_institute, :label => "Institution's Full Name" %>
+    <%= f.input :billing_address_additional_address_line, :label => 'Additional Address Line' %>
+    <%= f.input :billing_address_street, :label => 'Street' %>
+    <%= f.input :billing_address_state, :label => 'State' %>
+    <%= f.input :billing_address_city, :label => 'City' %>
+    <%= f.input :billing_address_country, :label => 'Country' %>
+    <%= f.input :billing_address_reference, :label => 'Your Reference number or PO-Number (if applicable)' %>
+  <% end %>
+  
+  <%= f.inputs "Tax Details", :id => "tax_details" do %>
     <%= f.input :tax_eu_member_state, :label => 'Tax eu member state' %>
+  <% end %>
+  
+  <%= f.inputs "Aims of the Intended Experiments", :id => "aims_of_intended_experiments" do %>
     <%= f.input :usage_aims_of_experiments, :label => 'Usage aims of experiments' %>
-    <%= f.input :usage_eu_projects, :label => 'Usage eu projects' %>
+    <%= f.input :usage_eu_projects, :label => 'Do you intend to use the material in EU-funded Project(s)? If yes, please insert project acronym(s)' %>
+  <% end %>
+  
+  <%= f.buttons do %>
+    <%= f.commit_button %>
   <% end %>
 <% end %>
