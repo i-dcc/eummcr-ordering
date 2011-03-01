@@ -56,12 +56,13 @@
   <% end %>
   
   <%= f.inputs "Tax Details", :id => "tax_details" do %>
-    <%= f.input :tax_eu_member_state, :label => 'Tax eu member state' %>
+    <%= f.input :tax_eu_member_state, :label => 'EU Member State?' %>
+    <%= f.input :tax_eu_vat_id, :label => 'EU VAT ID (if applicable)', :hint => 'If your country of residence is within the EU, please provide us with your VAT ID. If you are tax-exempt and, do not have one, you do not need to supply us with one.' %>
   <% end %>
   
   <%= f.inputs "Aims of the Intended Experiments", :id => "aims_of_intended_experiments" do %>
     <%= f.input :usage_aims_of_experiments, :label => 'Usage aims of experiments' %>
-    <%= f.input :usage_eu_projects, :label => 'Do you intend to use the material in EU-funded Project(s)? If yes, please insert project acronym(s)' %>
+    <%= f.input :usage_eu_projects, :label => 'Do you intend to use the material in EU-funded Project(s)? If yes, please insert project acronym(s)', :hint => 'This data is collected for statistical purposes only' %>
   <% end %>
   
   <%= f.buttons do %>
