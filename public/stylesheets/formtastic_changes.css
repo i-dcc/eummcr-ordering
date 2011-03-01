@@ -57,14 +57,14 @@ form.formtastic fieldset > ol > li.error > input {
   display: inline;
 }
 
-#errorExplanation {
+.errorExplanation {
   border: 2px solid #CF0000;
   padding: 0px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
 
-#errorExplanation h2 {
+.errorExplanation h2 {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 10px;
@@ -74,10 +74,45 @@ form.formtastic fieldset > ol > li.error > input {
   color: #fff;
 }
 
-#errorExplanation p {
+.errorExplanation p {
   color: #333;
   font-size: 12px;
-	margin: 10px;
+  margin: 10px !important;
 }
 
+.errorExplanation ul {
+  margin: 12px 24px !important;
+}
 
+.errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+#ordered_products thead th {
+	font-weight: normal;
+}
+
+#ordered_products td {
+	text-align: center;
+}
+
+#ordered_products thead th {
+	vertical-align: bottom;
+	height: 175px;
+	min-width: 24px;
+	white-space: nowrap;
+	padding: 0 10px 2px;
+}
+
+#ordered_products thead th span.vertical {
+	text-align:center;
+	width:16px;
+	margin:0 auto;
+	display: block;
+	transform: rotate(-90deg);
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(-90deg);
+	-webkit-transform-origin: 50% 50%;
+	padding-left: 5px;
+}

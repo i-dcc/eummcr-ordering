@@ -1,11 +1,19 @@
 <%= semantic_form_for @order do |f| %>
-  <% if @order.errors.any? %>  
-    <div id="errorExplanation">  
+  <%
+    ordered_product_errors = []
+    @order.errors.each do |attribute,errors_array|
+      if attribute.to_s =~ /ordered_products/
+        ordered_product_errors.push(errors_array) unless attribute.to_s == 'ordered_products.order_id'
+      end
+    end
+  %>
+  <% if @order.errors.any? %>
+    <div class="errorExplanation">  
       <h2>Errors were found when trying to process your order</h2>
       <p>
         Please review the information in the form below and correct any errors.
       </p>
-    </div>  
+    </div>
   <% end %>
   
   <%= f.inputs "Recipient's Institution", :id => "recipients_intitution" do %>
@@ -70,17 +78,29 @@
   <% end %>
   
   <fieldset id="ordered_products" class="inputs">
-    <legend>Order Details</legend>
+    <legend><span>Order Details</span></legend>
+    
+    <% unless ordered_product_errors.empty? %>
+      <div class="errorExplanation">  
+        <h2>Errors were found when trying to process these products</h2>
+        <ul>
+          <% ordered_product_errors.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
     <table>
       <thead>
         <tr>
           <th>Gene</th>
           <th>Material</th>
-          <th class="vertical">Genotyping</th>
-          <th class="vertical">1 Extra Vial per Clone</th>
-          <th class="vertical">Allele QC</th>
-          <th class="vertical">Karyotyping</th>
-          <th class="vertical">Replacement Vial(s)</th>
+          <th><span class="vertical">Genotyping</span></th>
+          <th><span class="vertical">1 Extra Vial per Clone</span></th>
+          <th><span class="vertical">Allele QC</span></th>
+          <th><span class="vertical">Karyotyping</span></th>
+          <th><span class="vertical">Replacement Vial(s)</span></th>
           <th>Price</th>
         </tr>
       </thead>
