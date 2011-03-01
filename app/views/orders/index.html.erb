@@ -2,6 +2,10 @@
 
 <table>
   <tr>
+    <th>ID</th>
+    <th>Institute</th>
+    <th>Principal Scientist</th>
+    <th># Ordered Products</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +13,10 @@
 
 <% @orders.each do |order| %>
   <tr>
+    <td><%= order.id %></td>
+    <td><%= order.recipient_institute_name %></td>
+    <td><%= order.recipient_principal_scientist_person %></td>
+    <td><%= order.ordered_products.size %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_url(order) %></td>
     <td><%= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete %></td>
