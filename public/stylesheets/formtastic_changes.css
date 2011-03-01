@@ -41,3 +41,43 @@ form.formtastic fieldset.inputs legend span {
 form.formtastic fieldset.buttons {
 	padding-left: 15px !important;
 }
+
+
+form.formtastic fieldset > ol > li p.inline-errors,
+form.formtastic fieldset > ol > li p.inline-hints {
+	font-style: italic;
+	font-size: smaller;
+}
+
+form.formtastic fieldset > ol > li.error > input {
+	border: 2px solid #CF0000;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  border: 2px solid #CF0000;
+  padding: 0px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 10px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  font-size: 12px;
+	margin: 10px;
+}
+
+

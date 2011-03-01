@@ -1,6 +1,8 @@
 class OrderedProduct < ActiveRecord::Base
   belongs_to :order
   
+  attr_accessor :nested
+  
   validates_presence_of :order_id
   validates_presence_of :product
   validates_presence_of :gene

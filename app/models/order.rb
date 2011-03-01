@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
-  has_many :ordered_products
+  has_many :ordered_products, :dependent => :destroy 
+  
+  accepts_nested_attributes_for :ordered_products, :allow_destroy => true, :reject_if => lambda { |a| a[:gene].blank? }
   
   validates_presence_of :recipient_institute_name
   validates_presence_of :recipient_institute_street
@@ -15,8 +17,6 @@ class Order < ActiveRecord::Base
   validates_presence_of :recipient_authorized_official_person
   validates_presence_of :recipient_authorized_official_phone
   validates_presence_of :recipient_authorized_official_fax
-  
-  validates_presence_of :tax_eu_member_state
   
   validates :recipient_principal_scientist_email, :email => true
   validates :recipient_authorized_official_email, :email => true

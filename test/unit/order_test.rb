@@ -23,7 +23,6 @@ class OrderTest < ActiveSupport::TestCase
   should validate_presence_of :recipient_authorized_official_person
   should validate_presence_of :recipient_authorized_official_phone
   should validate_presence_of :recipient_authorized_official_fax
-  should validate_presence_of :tax_eu_member_state
   
   context "An Order Model" do
     should "validate email addresses correctly" do

@@ -12,7 +12,9 @@ EummcrOrdering::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
+  
+  resources :orders
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -55,11 +57,4 @@ EummcrOrdering::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-  
-  match 'orders',          :to => 'orders#index', :as => :orders
-  match 'orders/new',      :to => 'orders#new',   :as => :new_order
-  match 'orders/:id',      :to => 'orders#edit',  :as => :order
-  match 'orders/edit/:id', :to => 'orders#edit',  :as => :edit_order
-  
-  match ':controller(/:action(/:id(.:format)))'
 end

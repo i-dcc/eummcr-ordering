@@ -1,5 +1,14 @@
 <%= semantic_form_for @order do |f| %>
-  <% f.inputs "Recipient's Institution", :id => "recipients_intitution" do %>
+  <% if @order.errors.any? %>  
+    <div id="errorExplanation">  
+      <h2>Errors were found when trying to process your order</h2>
+      <p>
+        Please review the information in the form below and correct any errors.
+      </p>
+    </div>  
+  <% end %>
+  
+  <%= f.inputs "Recipient's Institution", :id => "recipients_intitution" do %>
     <%= f.input :recipient_institute_name, :label => "Institution's Full Name" %>
     <%= f.input :recipient_institute_additional_address_line, :label => 'Additional Address Line' %>
     <%= f.input :recipient_institute_street, :label => 'Street' %>
@@ -60,12 +69,44 @@
     <%= f.input :tax_eu_vat_id, :label => 'EU VAT ID (if applicable)', :hint => 'If your country of residence is within the EU, please provide us with your VAT ID. If you are tax-exempt and, do not have one, you do not need to supply us with one.' %>
   <% end %>
   
+  <fieldset id="ordered_products" class="inputs">
+    <legend>Order Details</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>Gene</th>
+          <th>Material</th>
+          <th class="vertical">Genotyping</th>
+          <th class="vertical">1 Extra Vial per Clone</th>
+          <th class="vertical">Allele QC</th>
+          <th class="vertical">Karyotyping</th>
+          <th class="vertical">Replacement Vial(s)</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.ordered_products.each do |ordered_product| %>
+          <%= f.fields_for :ordered_products, ordered_product do |op| %>
+            <tr>
+              <td><%= op.text_field :gene %></td>
+              <td><%= op.text_field :product %></td>
+              <td><%= op.check_box :genotyping %></td>
+              <td><%= op.check_box :extra_vial_per_clone %></td>
+              <td><%= op.check_box :allele_qc %></td>
+              <td><%= op.check_box :karyotyping %></td>
+              <td><%= op.check_box :replacement_vials %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </fieldset>
+  
   <%= f.inputs "Aims of the Intended Experiments", :id => "aims_of_intended_experiments" do %>
     <%= f.input :usage_aims_of_experiments, :label => 'Usage aims of experiments' %>
-    <%= f.input :usage_eu_projects, :label => 'Do you intend to use the material in EU-funded Project(s)? If yes, please insert project acronym(s)', :hint => 'This data is collected for statistical purposes only' %>
+    <%= f.input :usage_eu_projects, :as => :string, :label => 'Do you intend to use the material in EU-funded Project(s)? If yes, please insert project acronym(s)', :hint => 'This data is collected for statistical purposes only' %>
   <% end %>
   
-  <%= f.buttons do %>
-    <%= f.commit_button %>
-  <% end %>
+  <%= f.buttons %>
 <% end %>

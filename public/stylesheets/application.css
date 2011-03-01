@@ -3,3 +3,18 @@
 body {
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}

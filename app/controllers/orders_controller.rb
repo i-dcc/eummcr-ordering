@@ -25,7 +25,8 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
-
+    8.times { @order.ordered_products.build }
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @order }
@@ -47,6 +48,13 @@ class OrdersController < ApplicationController
         format.html { redirect_to(@order, :notice => 'Order was successfully created.') }
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
+        if @order.ordered_products.empty?
+          8.times { @order.ordered_products.build }
+        else
+          no_times = 8 - @order.ordered_products.size
+          no_times.times { @order.ordered_products.build }
+        end
+        
         format.html { render :action => "new" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end

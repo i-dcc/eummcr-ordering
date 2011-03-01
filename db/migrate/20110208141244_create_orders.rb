@@ -42,7 +42,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :billing_address_city
       t.string :billing_address_country
       t.string :billing_address_reference
-      t.boolean :tax_eu_member_state, :null => false
+      t.boolean :tax_eu_member_state, :default => true
       t.string :tax_eu_vat_id
       t.text :usage_aims_of_experiments
       t.text :usage_eu_projects
