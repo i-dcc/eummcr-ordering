@@ -89,6 +89,10 @@ form.formtastic fieldset > ol > li.error > input {
   list-style: disc;
 }
 
+#ordered_products {
+	overflow: visible !important;
+}
+
 #ordered_products thead th {
 	font-weight: normal;
 }

@@ -3,7 +3,7 @@ class OrderedProduct < ActiveRecord::Base
   
   attr_accessor :nested
   
-  validates_presence_of :order_id
+  validates_presence_of :order_id, :on => :save, :unless => :nested
   validates_presence_of :product
   validates_presence_of :gene
   
