@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301171307) do
+ActiveRecord::Schema.define(:version => 20110302140344) do
 
   create_table "ordered_product_types", :force => true do |t|
     t.string   "product_type", :null => false
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(:version => 20110301171307) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "settings", :force => true do |t|
+    t.string   "key",        :null => false
+    t.string   "value",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["key", "value"], :name => "index_settings_on_key_and_value", :unique => true
 
   add_foreign_key "ordered_products", "ordered_product_types", :name => "ordered_products_ordered_product_type_id_fk"
   add_foreign_key "ordered_products", "orders", :name => "ordered_products_order_id_fk"

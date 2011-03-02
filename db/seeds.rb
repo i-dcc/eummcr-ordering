@@ -18,3 +18,12 @@ ordered_product_types = OrderedProductType.create([
   { :product_type => 'Mutant ES Cell Clones (5 Clones)',                :price => 1900.00,  :shipping => 300.00 },
   { :product_type => '1 Wild Type Line',                                :price => 1000.00,  :shipping => 50.00  }
 ])
+
+application_settings = Settings.create([
+  { :key => "vat",                        :value => '19.00'  },
+  { :key => "genotyping_price",           :value => '{ "price":300.00, "per":"gene" }'  },
+  { :key => "allele_qc_price",            :value => '{ "price":500.00, "per":"gene" }'  },
+  { :key => "karyotyping_price",          :value => '{ "price":400.00, "per":"clone" }' },
+  { :key => "extra_vial_per_clone_price", :value => '{ "price":200.00, "per":"clone" }' },
+  { :key => "replacement_vials_price",    :value => '{ "price":200.00, "per":"clone" }' }
+])
