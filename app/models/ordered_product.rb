@@ -1,10 +1,11 @@
 class OrderedProduct < ActiveRecord::Base
   belongs_to :order
+  belongs_to :ordered_product_type
   
   attr_accessor :nested
   
   validates_presence_of :order_id, :on => :save, :unless => :nested
-  validates_presence_of :product
+  validates_presence_of :ordered_product_type_id
   validates_presence_of :gene
   
   validate :validate_solr_response

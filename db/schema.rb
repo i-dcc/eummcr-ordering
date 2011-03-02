@@ -10,19 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225110802) do
+ActiveRecord::Schema.define(:version => 20110301171307) do
+
+  create_table "ordered_product_types", :force => true do |t|
+    t.string   "product_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ordered_product_types", ["product_type"], :name => "index_ordered_product_types_on_product_type", :unique => true
 
   create_table "ordered_products", :force => true do |t|
     t.integer  "order_id"
-    t.string   "gene",                                    :null => false
-    t.string   "product",                                 :null => false
-    t.boolean  "genotyping",           :default => false
-    t.boolean  "extra_vial_per_clone", :default => false
-    t.boolean  "allele_qc",            :default => false
-    t.boolean  "karyotyping",          :default => false
-    t.boolean  "replacement_vials",    :default => false
+    t.string   "gene",                                       :null => false
+    t.boolean  "genotyping",              :default => false
+    t.boolean  "extra_vial_per_clone",    :default => false
+    t.boolean  "allele_qc",               :default => false
+    t.boolean  "karyotyping",             :default => false
+    t.boolean  "replacement_vials",       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ordered_product_type_id",                    :null => false
   end
 
   create_table "orders", :force => true do |t|
@@ -75,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20110225110802) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "ordered_products", "ordered_product_types", :name => "ordered_products_ordered_product_type_id_fk"
   add_foreign_key "ordered_products", "orders", :name => "ordered_products_order_id_fk"
 
 end

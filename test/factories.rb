@@ -39,13 +39,13 @@ Factory.define :order do |order|
 end
 
 Factory.define :ordered_product do |product|
-  product.gene                  ['Ablim1','Cbx7','Cbx1','Mysm1','M6pr'].sort_by { rand }[0]
-  product.product               ['Mutant ES Cell Clones (1 clone)'].sort_by { rand }[0]
-  product.genotyping            [true,false].sort_by { rand }[0]
-  product.extra_vial_per_clone  [true,false].sort_by { rand }[0]
-  product.allele_qc             [true,false].sort_by { rand }[0]
-  product.karyotyping           [true,false].sort_by { rand }[0]
-  product.replacement_vials     [true,false].sort_by { rand }[0]
+  product.gene                      { ['Ablim1','Cbx7','Cbx1','Mysm1','M6pr'].sort_by { rand }[0] }
+  product.ordered_product_type_id   { OrderedProductType.all.sort_by { rand }[0].id }
+  product.genotyping                { [true,false].sort_by { rand }[0] }
+  product.extra_vial_per_clone      { [true,false].sort_by { rand }[0] }
+  product.allele_qc                 { [true,false].sort_by { rand }[0] }
+  product.karyotyping               { [true,false].sort_by { rand }[0] }
+  product.replacement_vials         { [true,false].sort_by { rand }[0] }
   
   product.association :order
 end

@@ -107,7 +107,7 @@
           <%= f.fields_for :ordered_products, ordered_product do |op| %>
             <tr>
               <td><%= op.text_field :gene %></td>
-              <td><%= op.text_field :product %></td>
+              <td><%= op.collection_select(:ordered_product_type_id, OrderedProductType.all, :id, :product_type, { :include_blank => true }) %></td>
               <td><%= op.check_box :genotyping %></td>
               <td><%= op.check_box :extra_vial_per_clone %></td>
               <td><%= op.check_box :allele_qc %></td>

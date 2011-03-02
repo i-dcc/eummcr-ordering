@@ -10,9 +10,9 @@ class OrderedProductTest < ActiveSupport::TestCase
   end
   
   should belong_to :order
+  should belong_to :ordered_product_type
   
   should validate_presence_of :gene
-  should validate_presence_of :product
   
   context "An OrderedProduct" do
     should "validate the solr response for a marker_symbol" do
