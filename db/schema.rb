@@ -13,7 +13,9 @@
 ActiveRecord::Schema.define(:version => 20110301171307) do
 
   create_table "ordered_product_types", :force => true do |t|
-    t.string   "product_type"
+    t.string   "product_type", :null => false
+    t.decimal  "price",        :null => false
+    t.decimal  "shipping",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,8 +1,9 @@
 class CreateOrderedProductTypes < ActiveRecord::Migration
   def self.up
     create_table :ordered_product_types do |t|
-      t.string :product_type
-
+      t.string  :product_type, :null => false
+      t.decimal :price, :null => false
+      t.decimal :shipping, :null => false
       t.timestamps
     end
     
