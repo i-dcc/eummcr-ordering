@@ -44,24 +44,27 @@ function ordered_product_details (ordered_product_row) {
 function ordered_product_price (product_info) {
   var product_price                        = Number(0.00);
   var ordered_product_type                 = PRODUCT_TYPE[product_info['ordered_product_type_id']];
-  var ordered_product_type_clone_count     = Number(ordered_product_type['clone_count']);
-  product_price                           += Number(ordered_product_type['price']);
-  product_info['ordered_product_type_id']  = false;
   
-  if ( ordered_product_type_clone_count > 0 ) {
-    $.each(product_info,function(value) {
-      if ( product_info[value] ) {
-        if ( value == 'replacement_vials' ) {
-          product_price = ( Number(EXTRAS_PRICE['replacement_vials']['price']) * ordered_product_type_clone_count );
-        } else {
-          if (EXTRAS_PRICE[value]['per'] == 'gene') {
-            product_price += Number(EXTRAS_PRICE[value]['price']);
-          } else if (EXTRAS_PRICE[value]['per'] == 'clone') {
-            product_price += ( Number(EXTRAS_PRICE[value]['price']) * ordered_product_type_clone_count );
+  if ( ordered_product_type ) {
+    var ordered_product_type_clone_count     = Number(ordered_product_type['clone_count']);
+    product_price                           += Number(ordered_product_type['price']);
+    product_info['ordered_product_type_id']  = false;
+    
+    if ( ordered_product_type_clone_count > 0 ) {
+      $.each(product_info,function(value) {
+        if ( product_info[value] ) {
+          if ( value == 'replacement_vials' ) {
+            product_price = ( Number(EXTRAS_PRICE['replacement_vials']['price']) * ordered_product_type_clone_count );
+          } else {
+            if (EXTRAS_PRICE[value]['per'] == 'gene') {
+              product_price += Number(EXTRAS_PRICE[value]['price']);
+            } else if (EXTRAS_PRICE[value]['per'] == 'clone') {
+              product_price += ( Number(EXTRAS_PRICE[value]['price']) * ordered_product_type_clone_count );
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
   
   return product_price;
@@ -72,17 +75,25 @@ function ordered_product_price (product_info) {
 // products, but if you're ordering replacement_vials - you can't 
 // order any other 'extras'.
 function ordered_product_checkbox_update (ordered_product_row,product_info) {
-  var ordered_product_type                 = PRODUCT_TYPE[product_info['ordered_product_type_id']];
-  var ordered_product_type_clone_count     = Number(ordered_product_type['clone_count']);
-  if ( ordered_product_type_clone_count > 0 ) {
-    $(ordered_product_row).find('input:checkbox').removeAttr('disabled');
-    
-    if ( product_info['replacement_vials'] ) {
-      $(ordered_product_row).find('input:checkbox:checked').each(function(index) {
-        if ( ! $(this).hasClass('replacement_vials') ) { $(this).removeAttr('checked') };
-      });
+  var ordered_product_type             = PRODUCT_TYPE[product_info['ordered_product_type_id']];
+  var totally_disable_checkboxes       = false;
+  
+  if ( ordered_product_type ) {
+    if ( Number(ordered_product_type['clone_count']) > 0 ) {
+      $(ordered_product_row).find('input:checkbox').removeAttr('disabled');
+      if ( product_info['replacement_vials'] ) {
+        $(ordered_product_row).find('input:checkbox:checked').each(function(index) {
+          if ( ! $(this).hasClass('replacement_vials') ) { $(this).removeAttr('checked') };
+        });
+      }
+    } else {
+      totally_disable_checkboxes = true;
     }
   } else {
+    totally_disable_checkboxes = true;
+  }
+  
+  if (totally_disable_checkboxes) {
     $(ordered_product_row).find('input:checkbox').removeAttr('checked').attr('disabled',true);
   }
 }
@@ -101,7 +112,7 @@ function order_subtotal_price () {
 // Basically it's the most expensive shipping price for a single 
 // product that has been ordered.
 function order_shipping_price () {
-  var shipping_costs = new Array();
+  var shipping_costs = [Number(0.00)];
   $('#ordered_products').find('select.ordered_product_type_id').each(function(index) {
     var ordered_product_type = PRODUCT_TYPE[ $(this).val() ];
     if ( ordered_product_type ) {
@@ -113,27 +124,27 @@ function order_shipping_price () {
 
 // Observe the ordered_product table rows.
 $('tr.ordered_product').live('change', function () {
+  // Check all of the data-points...
   var product_info = ordered_product_details(this);
   
-  // Has the user decided on a product_type?
-  if ( product_info['ordered_product_type_id'] ) {
-    // Amend the checkbox selections if needed...
-    ordered_product_checkbox_update(this,product_info);
-    product_info = ordered_product_details(this);
-    
-    // Calculate the price for this product, and the totals for the order.
-    
-    var product_price  = ordered_product_price(product_info);
-    $(this).find('td.price').html(product_price.formatMoney(2,'.',','));
-    
-    var subtotal = order_subtotal_price();
-    var shipping = order_shipping_price();
-    var vat      = Number( ( ( subtotal + shipping ) / 100 ) * VAT_RATE );
-    var total    = Number( subtotal + shipping + vat );
-    
-    $('td#subtotal').html( subtotal.formatMoney(2,'.',',') );
-    $('td#shipping').html( shipping.formatMoney(2,'.',',') );
-    $('td#vat').html( vat.formatMoney(2,'.',',') );
-    $('td#total').html( total.formatMoney(2,'.',',') );
-  }
+  // Amend the checkbox selections if needed...
+  ordered_product_checkbox_update(this,product_info);
+  
+  // Re-check all of the data-points...
+  product_info = ordered_product_details(this);
+  
+  // Calculate the price for this product, and the totals for the order...
+  
+  var product_price  = ordered_product_price(product_info);
+  $(this).find('td.price').html( product_price.formatMoney(2,'.',',') );
+  
+  var subtotal = order_subtotal_price();
+  var shipping = order_shipping_price();
+  var vat      = Number( ( ( subtotal + shipping ) / 100 ) * VAT_RATE );
+  var total    = Number( subtotal + shipping + vat );
+  
+  $('td#subtotal').html( subtotal.formatMoney(2,'.',',') );
+  $('td#shipping').html( shipping.formatMoney(2,'.',',') );
+  $('td#vat').html( vat.formatMoney(2,'.',',') );
+  $('td#total').html( total.formatMoney(2,'.',',') );
 });
