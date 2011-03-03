@@ -108,11 +108,17 @@
             <tr class="ordered_product">
               <td><%= op.text_field :gene %></td>
               <td><%= op.collection_select(:ordered_product_type_id, OrderedProductType.all, :id, :product_type, { :include_blank => true }, { :class => 'ordered_product_type_id' }) %></td>
-              <td><%= op.check_box :genotyping, { :class => 'genotyping', :disabled => true } %></td>
-              <td><%= op.check_box :extra_vial_per_clone, { :class => 'extra_vial_per_clone', :disabled => true } %></td>
-              <td><%= op.check_box :allele_qc, { :class => 'allele_qc', :disabled => true } %></td>
-              <td><%= op.check_box :karyotyping, { :class => 'karyotyping', :disabled => true } %></td>
-              <td><%= op.check_box :replacement_vials, { :class => 'replacement_vials', :disabled => true } %></td>
+              <%
+                check_box_options = { :disabled => true }
+                if ordered_product.ordered_product_type_id && OrderedProductType.find(ordered_product.ordered_product_type_id).clone_count > 0
+                  check_box_options.delete(:disabled)
+                end
+              %>
+              <td><%= op.check_box :genotyping, { :class => 'genotyping' }.merge(check_box_options) %></td>
+              <td><%= op.check_box :extra_vial_per_clone, { :class => 'extra_vial_per_clone' }.merge(check_box_options) %></td>
+              <td><%= op.check_box :allele_qc, { :class => 'allele_qc' }.merge(check_box_options) %></td>
+              <td><%= op.check_box :karyotyping, { :class => 'karyotyping' }.merge(check_box_options) %></td>
+              <td><%= op.check_box :replacement_vials, { :class => 'replacement_vials' }.merge(check_box_options) %></td>
               <td class="price">0.00</td>
             </tr>
           <% end %>
