@@ -1,9 +1,6 @@
 class SettingsController < ApplicationController
   def index
-    @settings = {
-      'product_type_price'    => {},
-      'product_type_shipping' => {}
-    }
+    @settings = { 'product_type' => {} }
     
     Settings.all.each do |setting|
       if setting.value =~ /^\{/
@@ -14,8 +11,12 @@ class SettingsController < ApplicationController
     end
     
     OrderedProductType.all.each do |product_type|
-      @settings['product_type_price'][product_type.id] = product_type.price
-      @settings['product_type_shipping'][product_type.id] = product_type.shipping
+      @settings['product_type'][product_type.id] = {
+        :product_type => product_type.product_type,
+        :price        => product_type.price,
+        :shipping     => product_type.shipping,
+        :clone_count  => product_type.clone_count
+      }
     end
     
     respond_to do |format|

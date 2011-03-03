@@ -93,7 +93,7 @@ form.formtastic fieldset > ol > li.error > input {
 	overflow: visible !important;
 }
 
-#ordered_products thead th {
+#ordered_products th {
 	font-weight: normal;
 }
 

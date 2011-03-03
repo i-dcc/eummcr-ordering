@@ -105,18 +105,34 @@
       <tbody>
         <% @order.ordered_products.each do |ordered_product| %>
           <%= f.fields_for :ordered_products, ordered_product do |op| %>
-            <tr>
+            <tr class="ordered_product">
               <td><%= op.text_field :gene %></td>
-              <td><%= op.collection_select(:ordered_product_type_id, OrderedProductType.all, :id, :product_type, { :include_blank => true }) %></td>
-              <td><%= op.check_box :genotyping %></td>
-              <td><%= op.check_box :extra_vial_per_clone %></td>
-              <td><%= op.check_box :allele_qc %></td>
-              <td><%= op.check_box :karyotyping %></td>
-              <td><%= op.check_box :replacement_vials %></td>
-              <td></td>
+              <td><%= op.collection_select(:ordered_product_type_id, OrderedProductType.all, :id, :product_type, { :include_blank => true }, { :class => 'ordered_product_type_id' }) %></td>
+              <td><%= op.check_box :genotyping, { :class => 'genotyping', :disabled => true } %></td>
+              <td><%= op.check_box :extra_vial_per_clone, { :class => 'extra_vial_per_clone', :disabled => true } %></td>
+              <td><%= op.check_box :allele_qc, { :class => 'allele_qc', :disabled => true } %></td>
+              <td><%= op.check_box :karyotyping, { :class => 'karyotyping', :disabled => true } %></td>
+              <td><%= op.check_box :replacement_vials, { :class => 'replacement_vials', :disabled => true } %></td>
+              <td class="price">0.00</td>
             </tr>
           <% end %>
         <% end %>
+        <tr>
+          <th colspan="7" style="text-align:right;">Subtotal</th>
+          <td id="subtotal">0.00</td>
+        </tr>
+        <tr>
+          <th colspan="7" style="text-align:right;">Shipping</th>
+          <td id="shipping">0.00</td>
+        </tr>
+        <tr>
+          <th colspan="7" style="text-align:right;"><%= @vat %>&#37; VAT</th>
+          <td id="vat">0.00</td>
+        </tr>
+        <tr>
+          <th colspan="7" style="text-align:right;">Total</th>
+          <td id="total">0.00</td>
+        </tr>
       </tbody>
     </table>
   </fieldset>

@@ -27,6 +27,8 @@ class OrdersController < ApplicationController
     @order = Order.new
     8.times { @order.ordered_products.build }
     
+    @vat = Settings.where(:key => 'vat').first.value.to_f
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @order }
