@@ -4,6 +4,8 @@
     @order.errors.each do |attribute,errors_array|
       if attribute.to_s =~ /ordered_products/
         ordered_product_errors.push(errors_array) unless attribute.to_s == 'ordered_products.order_id'
+      elsif attribute.to_s =~ /_price/ && errors_array.include?("can't be blank")
+        ordered_product_errors.push('You have not ordered any products')
       end
     end
   %>
@@ -82,7 +84,7 @@
       <div class="errorExplanation">  
         <h2>Errors were found when trying to process these products</h2>
         <ul>
-          <% ordered_product_errors.each do |error| %>
+          <% ordered_product_errors.uniq.each do |error| %>
             <li><%= error %></li>
           <% end %>
         </ul>
@@ -99,7 +101,7 @@
           <th><span class="vertical">Allele QC</span></th>
           <th><span class="vertical">Karyotyping</span></th>
           <th><span class="vertical">Replacement Vial(s)</span></th>
-          <th class="price">Price</th>
+          <th class="price">Price (&euro;)</th>
         </tr>
       </thead>
       <tbody>
@@ -119,25 +121,25 @@
               <td><%= op.check_box :allele_qc, { :class => 'allele_qc' }.merge(check_box_options) %></td>
               <td><%= op.check_box :karyotyping, { :class => 'karyotyping' }.merge(check_box_options) %></td>
               <td><%= op.check_box :replacement_vials, { :class => 'replacement_vials' }.merge(check_box_options) %></td>
-              <td class="price">0.00</td>
+              <td><%= op.text_field :price, { :class => 'price', :readonly => true } %></td>
             </tr>
           <% end %>
         <% end %>
         <tr>
           <th colspan="7" style="text-align:right;">Subtotal</th>
-          <td id="subtotal">0.00</td>
+          <td><%= f.text_field :subtotal_price, { :id => 'subtotal', :readonly => true } %></td>
         </tr>
         <tr>
           <th colspan="7" style="text-align:right;">Shipping</th>
-          <td id="shipping">0.00</td>
+          <td><%= f.text_field :shipping_price, { :id => 'shipping', :readonly => true } %></td>
         </tr>
         <tr>
           <th colspan="7" style="text-align:right;"><%= @vat %>&#37; VAT</th>
-          <td id="vat">0.00</td>
+          <td><%= f.text_field :vat_price, { :id => 'vat', :readonly => true } %></td>
         </tr>
         <tr>
           <th colspan="7" style="text-align:right;">Total</th>
-          <td id="total">0.00</td>
+          <td><%= f.text_field :total_price, { :id => 'total', :readonly => true } %></td>
         </tr>
       </tbody>
     </table>

@@ -18,6 +18,11 @@ class Order < ActiveRecord::Base
   validates_presence_of :recipient_authorized_official_phone
   validates_presence_of :recipient_authorized_official_fax
   
+  validates_presence_of :subtotal_price
+  validates_presence_of :shipping_price
+  validates_presence_of :vat_price
+  validates_presence_of :total_price
+  
   validates :recipient_principal_scientist_email, :email => true
   validates :recipient_authorized_official_email, :email => true
 end

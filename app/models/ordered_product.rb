@@ -7,6 +7,7 @@ class OrderedProduct < ActiveRecord::Base
   validates_presence_of :order_id, :on => :save, :unless => :nested
   validates_presence_of :ordered_product_type_id
   validates_presence_of :gene
+  validates_presence_of :price
   
   validate :validate_solr_response
   

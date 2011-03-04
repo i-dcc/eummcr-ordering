@@ -36,6 +36,10 @@ Factory.define :order do |order|
   order.billing_address_country                   'United Kingdom'
   order.billing_address_reference                 'PO-12345678'
   order.tax_eu_member_state                       true
+  order.subtotal_price                            '0.00'
+  order.shipping_price                            '0.00'
+  order.vat_price                                 '0.00'
+  order.total_price                               '0.00'
 end
 
 Factory.define :ordered_product do |product|
@@ -46,6 +50,7 @@ Factory.define :ordered_product do |product|
   product.allele_qc                 { [true,false].sort_by { rand }[0] }
   product.karyotyping               { [true,false].sort_by { rand }[0] }
   product.replacement_vials         { [true,false].sort_by { rand }[0] }
+  product.price                     '0.00'
   
   product.association :order
 end

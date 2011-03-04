@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20110302140344) do
     t.boolean  "allele_qc",               :default => false
     t.boolean  "karyotyping",             :default => false
     t.boolean  "replacement_vials",       :default => false
+    t.decimal  "price",                                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ordered_product_type_id",                    :null => false
@@ -81,6 +82,10 @@ ActiveRecord::Schema.define(:version => 20110302140344) do
     t.string   "tax_eu_vat_id"
     t.text     "usage_aims_of_experiments"
     t.text     "usage_eu_projects"
+    t.decimal  "subtotal_price",                                                          :null => false
+    t.decimal  "shipping_price",                                                          :null => false
+    t.decimal  "vat_price",                                                               :null => false
+    t.decimal  "total_price",                                                             :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,9 +1,11 @@
 class OrdersController < ApplicationController
+  before_filter :get_vat
+  
   # GET /orders
   # GET /orders.xml
   def index
     @orders = Order.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @orders }
@@ -26,8 +28,6 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     8.times { @order.ordered_products.build }
-    
-    @vat = Settings.where(:key => 'vat').first.value.to_f
     
     respond_to do |format|
       format.html # new.html.erb
@@ -56,7 +56,6 @@ class OrdersController < ApplicationController
           no_times = 8 - @order.ordered_products.size
           no_times.times { @order.ordered_products.build }
         end
-        
         format.html { render :action => "new" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end
@@ -89,5 +88,11 @@ class OrdersController < ApplicationController
       format.html { redirect_to(orders_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def get_vat
+    @vat = Settings.where(:key => 'vat').first.value.to_f
   end
 end

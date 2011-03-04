@@ -9,6 +9,7 @@ class CreateOrderedProducts < ActiveRecord::Migration
       t.boolean    :allele_qc,             :default => false
       t.boolean    :karyotyping,           :default => false
       t.boolean    :replacement_vials,     :default => false
+      t.decimal    :price,                 :null => false
       t.timestamps
     end
     

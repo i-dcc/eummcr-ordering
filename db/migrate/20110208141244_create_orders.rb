@@ -46,6 +46,10 @@ class CreateOrders < ActiveRecord::Migration
       t.string :tax_eu_vat_id
       t.text :usage_aims_of_experiments
       t.text :usage_eu_projects
+      t.decimal :subtotal_price, :null => false
+      t.decimal :shipping_price, :null => false
+      t.decimal :vat_price, :null => false
+      t.decimal :total_price, :null => false
 
       t.timestamps
     end

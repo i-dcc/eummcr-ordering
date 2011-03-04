@@ -102,8 +102,8 @@ function ordered_product_checkbox_update (ordered_product_row,product_info) {
 // the whole order.
 function order_subtotal_price () {
   var subtotal = Number(0.00);
-  $('#ordered_products').find('td.price').each(function(index) {
-    subtotal += Number( $(this).html().replace(',','') );
+  $('#ordered_products').find('input.price').each(function(index) {
+    subtotal += Number( $(this).val() );
   });
   return subtotal;
 }
@@ -136,15 +136,15 @@ $('tr.ordered_product').live('change', function () {
   // Calculate the price for this product, and the totals for the order...
   
   var product_price  = ordered_product_price(product_info);
-  $(this).find('td.price').html( product_price.formatMoney(2,'.',',') );
+  $(this).find('input.price').val( product_price.formatMoney(2,'.','') );
   
   var subtotal = order_subtotal_price();
   var shipping = order_shipping_price();
   var vat      = Number( ( ( subtotal + shipping ) / 100 ) * VAT_RATE );
   var total    = Number( subtotal + shipping + vat );
   
-  $('td#subtotal').html( subtotal.formatMoney(2,'.',',') );
-  $('td#shipping').html( shipping.formatMoney(2,'.',',') );
-  $('td#vat').html( vat.formatMoney(2,'.',',') );
-  $('td#total').html( total.formatMoney(2,'.',',') );
+  $('input#subtotal').val( subtotal.formatMoney(2,'.','') );
+  $('input#shipping').val( shipping.formatMoney(2,'.','') );
+  $('input#vat').val( vat.formatMoney(2,'.','') );
+  $('input#total').val( total.formatMoney(2,'.','') );
 });
