@@ -134,7 +134,11 @@
           <td><%= f.text_field :shipping_price, { :id => 'shipping', :readonly => true } %></td>
         </tr>
         <tr>
-          <th colspan="7" style="text-align:right;" id="vat_description"><%= @vat %>&#37; VAT</th>
+          <%
+            vat = @vat
+            vat = 0.00 unless @order.tax_eu_member_state
+          %>
+          <th colspan="7" style="text-align:right;" id="vat_description"><%= vat %>&#37; VAT</th>
           <td><%= f.text_field :vat_price, { :id => 'vat', :readonly => true } %></td>
         </tr>
         <tr>
