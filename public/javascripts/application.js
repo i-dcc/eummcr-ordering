@@ -122,6 +122,30 @@ function order_shipping_price () {
   return shipping_costs.sort( function(a,b){ return b - a } )[0];
 }
 
+// Function to update all of the total prices at the bottom of the form
+function order_update_total_prices () {
+  var subtotal = order_subtotal_price();
+  
+  if (subtotal > 0) {
+    var shipping = order_shipping_price();
+    var vat      = Number( ( ( subtotal + shipping ) / 100 ) * order_vat_rate() );
+    var total    = Number( subtotal + shipping + vat );
+    
+    $('input#subtotal').val( subtotal.formatMoney(2,'.','') );
+    $('input#shipping').val( shipping.formatMoney(2,'.','') );
+    $('input#vat').val( vat.formatMoney(2,'.','') );
+    $('input#total').val( total.formatMoney(2,'.','') );
+  }
+}
+
+// Function to set the VAT rate for the form.  If the requestor is in 
+// the EU, we use VAT_RATE - if outside, it's 0.00.
+function order_vat_rate () {
+  var eu_vat = $('#order_tax_eu_member_state_input input:checkbox:checked').first().size() ? true : false;
+  if ( eu_vat ) { return VAT_RATE; } 
+  else          { return Number(0.00); }
+}
+
 // Observe the ordered_product table rows.
 $('tr.ordered_product').live('change', function () {
   // Check all of the data-points...
@@ -134,17 +158,16 @@ $('tr.ordered_product').live('change', function () {
   product_info = ordered_product_details(this);
   
   // Calculate the price for this product, and the totals for the order...
-  
   var product_price  = ordered_product_price(product_info);
   $(this).find('input.price').val( product_price.formatMoney(2,'.','') );
   
-  var subtotal = order_subtotal_price();
-  var shipping = order_shipping_price();
-  var vat      = Number( ( ( subtotal + shipping ) / 100 ) * VAT_RATE );
-  var total    = Number( subtotal + shipping + vat );
-  
-  $('input#subtotal').val( subtotal.formatMoney(2,'.','') );
-  $('input#shipping').val( shipping.formatMoney(2,'.','') );
-  $('input#vat').val( vat.formatMoney(2,'.','') );
-  $('input#total').val( total.formatMoney(2,'.','') );
+  order_update_total_prices();
+});
+
+// Observe the 'EU Member State?' checkbox - this toggles the amount of tax 
+// we need to charge.
+$('#order_tax_eu_member_state_input input:checkbox').live('change', function () {
+  var vat = order_vat_rate();
+  $('#vat_description').html( vat.formatMoney(1,'.','') + '&#37; VAT' );
+  order_update_total_prices();
 });
